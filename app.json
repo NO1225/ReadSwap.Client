@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "readswap.client",
-    "slug": "readswap.client",
+    "name": "ReadSwap",
+    "slug": "ReadSwap",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
