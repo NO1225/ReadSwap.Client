@@ -1,0 +1,3 @@
+type TabOneParamList = {
+    TabOneScreen: undefined;
+};
