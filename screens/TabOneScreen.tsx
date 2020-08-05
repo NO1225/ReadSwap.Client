@@ -1,15 +1,24 @@
 import * as React from 'react';
+import { useState } from 'react';
+
 import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import TestComponent from '../components/TestComponent';
 
 export default function TabOneScreen() {
+  const [person, setPerson] = useState<Person>({
+    firstName:"ahmad",
+    lastName:"Hassan"
+  });
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <TestComponent firstName="ahmd" lastName="ali"/>
+      <TestComponent firstName="ahmd2" lastName="ali5"/>
+      <TestComponent firstName={person.firstName} lastName={person.lastName}/>
+      
     </View>
   );
 }
