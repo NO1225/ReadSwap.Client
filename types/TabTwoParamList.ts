@@ -1,3 +1,0 @@
-type TabTwoParamList = {
-    TabTwoScreen: undefined;
-};
