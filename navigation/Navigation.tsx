@@ -4,17 +4,44 @@ import { ColorSchemeName } from 'react-native';
 
 import LinkingConfiguration from './LinkingConfiguration';
 import RootNavigator from './RootNavigator';
-import BottomTabNavigator from './BottomTabNavigator';
+import MainNavigation from './MainNavigation';
+import { ScreenContext } from '../contexts/ScreenContext';
+import { useContext } from 'react';
+import AuthNavigation from './AuthNavigation';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator childComponent={BottomTabNavigator} />
-    </NavigationContainer>
-  );
+  const screenContext = useContext(ScreenContext);
+
+
+  if (screenContext.currentScreen == "Auth") {
+    return (
+      <NavigationContainer
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <RootNavigator childComponent={AuthNavigation} />
+      </NavigationContainer>
+    );
+  }
+  else if (screenContext.currentScreen == "Main") {
+    return (
+      <NavigationContainer
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <RootNavigator childComponent={MainNavigation} />
+      </NavigationContainer>
+    );
+  }
+  else {
+    return (
+      <NavigationContainer
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <RootNavigator childComponent={AuthNavigation} />
+      </NavigationContainer>
+    );
+  }
+
 }
 
