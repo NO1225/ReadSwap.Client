@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import SearchScreen from '../../screens/searchTab/SearchScreen';
 import BookDetailsScreen from '../../screens/searchTab/BookDetailsScreen';
+import { useLocale } from '../../hooks/useLocale';
 
 const SearchStack = createStackNavigator<SearchTabParamList>();
 
@@ -12,7 +13,7 @@ export default function SearchTabStack() {
             <SearchStack.Screen
                 name="SearchScreen"
                 component={SearchScreen}
-                options={{ headerTitle: 'Search for a Book' }}
+                options={{ headerTitle: useLocale({},"searchForBookHeader") }}
             />
             <SearchStack.Screen
                 name="BookDetailsScreen"

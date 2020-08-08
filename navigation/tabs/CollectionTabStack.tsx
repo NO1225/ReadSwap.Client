@@ -6,6 +6,7 @@ import MyBookDetailsScreen from '../../screens/collectionTab/MyBookDetailsScreen
 import MyRequestScreen from '../../screens/collectionTab/MyRequestScreen';
 import MySentRequestScreen from '../../screens/collectionTab/MySentRequestScreen';
 import NewBookScreen from '../../screens/collectionTab/NewBookScreen';
+import { useLocale } from '../../hooks/useLocale';
 
 const CollectionStack = createStackNavigator<CollectionParamList>();
 
@@ -15,7 +16,7 @@ export default function CollectionTabStack() {
             <CollectionStack.Screen
                 name="MyCollectionScreen"
                 component={MyCollectionScreen}
-                options={{ headerTitle: 'My Collection' }}
+                options={{ headerTitle: useLocale({},"myCollectionHeader") }}
             />
             <CollectionStack.Screen
                 name="MyBookDetailsScreen"
@@ -35,7 +36,7 @@ export default function CollectionTabStack() {
             <CollectionStack.Screen
                 name="NewBookScreen"
                 component={NewBookScreen}
-                options={{ headerTitle: 'Add a New Book' }}
+                options={{ headerTitle: useLocale({},"addNewBookHeader") }}
             />
         </CollectionStack.Navigator>
     )

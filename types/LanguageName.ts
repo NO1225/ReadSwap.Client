@@ -1,0 +1,1 @@
+type LanguageName = 'en'|'ar';

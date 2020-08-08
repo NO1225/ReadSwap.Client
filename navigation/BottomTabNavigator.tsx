@@ -7,6 +7,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import MainTabStack from './tabs/MainTabStack';
 import CollectionTabStack from './tabs/CollectionTabStack';
 import SearchTabStack from './tabs/SearchTabStack';
+import { useLocale } from '../hooks/useLocale';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -22,6 +23,7 @@ export default function BottomTabNavigator() {
         component={MainTabStack}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarLabel: useLocale({},"mainTabLabel")
         }}
       />
       <BottomTab.Screen
@@ -29,6 +31,7 @@ export default function BottomTabNavigator() {
         component={CollectionTabStack}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarLabel: useLocale({},"collectionTabLabel")
         }}
       />
       <BottomTab.Screen
@@ -36,6 +39,7 @@ export default function BottomTabNavigator() {
         component={SearchTabStack}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarLabel: useLocale({},"searchTabLabel")
         }}
       />
     </BottomTab.Navigator>
