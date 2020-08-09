@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Text as DefaultText, View as DefaultView } from 'react-native';
 import { useThemeColor } from '../hooks/useThemeColor';
+import { FontSize } from '../constants/FontSize';
 
 
 type ThemeProps = {
@@ -14,8 +15,9 @@ export type ViewProps = ThemeProps & DefaultView['props'];
 export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const fontSize = FontSize.Regular
 
-  return <DefaultText style={[{ color }, style]} {...otherProps} />;
+  return <DefaultText style={[{ color, fontSize }, style]} {...otherProps} />;
 }
 
 export function View(props: ViewProps) {

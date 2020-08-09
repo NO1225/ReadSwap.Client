@@ -22,7 +22,7 @@ export default function BottomTabNavigator() {
         name="MainTab"
         component={MainTabStack}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="newspaper-o" color={color} />,
           tabBarLabel: useLocale({},"mainTabLabel")
         }}
       />
@@ -30,7 +30,7 @@ export default function BottomTabNavigator() {
         name="CollectionTab"
         component={CollectionTabStack}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
           tabBarLabel: useLocale({},"collectionTabLabel")
         }}
       />
@@ -38,7 +38,7 @@ export default function BottomTabNavigator() {
         name="SearchTab"
         component={SearchTabStack}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
           tabBarLabel: useLocale({},"searchTabLabel")
         }}
       />

@@ -1,10 +1,11 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
+import { FontSize } from '../constants/FontSize'
 
-export default function TabBarIcon(props: { name: string; color: string }) {
+export default function TabBarIcon(props: { name: Icon; color: string }) {
     return (
-        <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />
+        <FontAwesome size={FontSize.xxxxxLarge} style={{ marginBottom: -3 }} {...props} />
     )
 }
 
