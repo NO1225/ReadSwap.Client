@@ -12,6 +12,8 @@ export default {
     collectionTabLabel: "Collection",
     searchTabLabel: "Search",
     settingsHeader: "Settings",
+    createNewAccountHeader: "Create a New Account",
+    emailLabel: "E-mail"
   },
   ar: {
     greeting:"مرحبا",
@@ -24,7 +26,10 @@ export default {
     mainTabLabel: "الرئيسية",
     collectionTabLabel: "المجموعة",
     searchTabLabel: "بحث",
-    settingsHeader: "الاعدادات"
+    settingsHeader: "الاعدادات",
+    createNewAccountHeader: "انشاء حساب جديد",
+    emailLabel: "البريد الالكتروني"
+
 
 
   },

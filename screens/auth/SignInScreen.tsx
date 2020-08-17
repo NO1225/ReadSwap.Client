@@ -3,8 +3,9 @@ import { StyleSheet, Button} from 'react-native'
 import { View, Text } from '../../components/Themed'
 import { ScreenContext } from '../../contexts/ScreenContext';
 import { useLocale } from '../../hooks/useLocale';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export default function SignInScreen() {
+export default function SignInScreen({navigation}:{navigation:StackNavigationProp<AuthNavigationParamList,"SignInScreen">}) {
 
     const screenContext = useContext(ScreenContext);
 
@@ -15,10 +16,15 @@ export default function SignInScreen() {
         }
     }
 
+    const goToSignUp = ()=>{
+        navigation.navigate("SignUpScreen");
+    }
+
     return (
         <View>
             <Text>{useLocale({},"greeting")}</Text>
             <Button title="sign in" onPress={signIn}/>
+            <Button title="sign up" onPress={goToSignUp}/>
         </View>
     )
 }
