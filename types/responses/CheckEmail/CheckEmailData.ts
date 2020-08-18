@@ -1,0 +1,3 @@
+type CheckEmailData = {
+    exists: boolean;
+};

@@ -3,7 +3,7 @@ import ApiRoutes from "../constants/ApiRoutes";
 
 export async function checkEmailService(email:string)
 {
-    let response = await axios.post<CheckEmailResponse>(ApiRoutes.checkEmail,{
+    let response = await axios.post<ResponseWithData<CheckEmailData>>(ApiRoutes.checkEmail,{
         email
     })
 

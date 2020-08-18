@@ -22,7 +22,6 @@ export default function useDeviceLocale(): NonNullable<LanguageName> {
             break;
     }
 
-    console.log(currentLanguage); //en_US
     return currentLanguage;
 }
 

@@ -1,3 +1,0 @@
-type CheckEmail = {
-    exists: Boolean;
-};

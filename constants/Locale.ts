@@ -13,7 +13,9 @@ export default {
     searchTabLabel: "Search",
     settingsHeader: "Settings",
     createNewAccountHeader: "Create a New Account",
-    emailLabel: "E-mail"
+    emailLabel: "E-mail",
+    passwardLabel: "Passward",
+    confirmPasswardLabel: "Confirm Passward",
   },
   ar: {
     greeting:"مرحبا",
@@ -28,8 +30,9 @@ export default {
     searchTabLabel: "بحث",
     settingsHeader: "الاعدادات",
     createNewAccountHeader: "انشاء حساب جديد",
-    emailLabel: "البريد الالكتروني"
-
+    emailLabel: "البريد الالكتروني",
+    passwardLabel:"كلمة المرور",
+    confirmPasswardLabel: "تأكيد كلمة المرور",
 
 
   },
