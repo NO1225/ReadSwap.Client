@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { StyleSheet, Button} from 'react-native'
-import { View, Text } from '../../components/Themed'
+import { View } from "../../components/themed/View";
+import { Text } from "../../components/themed/Text";
 import { ScreenContext } from '../../contexts/ScreenContext';
 import { useLocale } from '../../hooks/useLocale';
 import { StackNavigationProp } from '@react-navigation/stack';

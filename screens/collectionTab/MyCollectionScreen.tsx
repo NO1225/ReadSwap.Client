@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Button } from 'react-native'
-import { View, Text } from '../../components/Themed'
+import { View } from "../../components/themed/View"
+import { Text } from "../../components/themed/Text"
 import { StackNavigationProp } from '@react-navigation/stack'
 
 export default function MyCollectionScreen({navigation}:{navigation:StackNavigationProp<CollectionParamList>}) {

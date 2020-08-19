@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { View } from '../Themed'
+import { View } from "../themed/View";
 
 
 export default function StagesLayout({ Stages, onFinish }: { Stages: Stage[], onFinish: () => void }) {
@@ -37,10 +37,15 @@ export default function StagesLayout({ Stages, onFinish }: { Stages: Stage[], on
 
 
     return (
-        <View>
+        <View style={styles.container}>
             {Stages[currentStage].Component(nextHundler, backHundler, finishHundler)}
         </View>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        width: '100%'
+    }
+})
