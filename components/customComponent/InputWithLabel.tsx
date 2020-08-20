@@ -33,7 +33,7 @@ export default function InputWithLabel(
         <View style={styles.inputComponentContainer}>
             <Text>{label}</Text>
             {errorMessage.length > 0 ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
-            <TextInput secureTextEntry placeholder={placeholder} value={value} onChangeText={setValue} />
+            <TextInput secureTextEntry={secureTextEntry} placeholder={placeholder} value={value} onChangeText={setValue} />
         </View>
     )
 }

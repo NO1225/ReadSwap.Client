@@ -1,6 +1,7 @@
 
 export default {
   en: {
+    direction: "ltr",
     greeting:"Hello",
     myCollectionHeader: "My Collection",
     addNewBookHeader: "Add a New Book",
@@ -18,6 +19,7 @@ export default {
     confirmPasswardLabel: "Confirm Passward",
   },
   ar: {
+    direction: "rtl",
     greeting:"مرحبا",
     myCollectionHeader: "مجموعتي",
     addNewBookHeader: "اضافة كتاب جديد",
