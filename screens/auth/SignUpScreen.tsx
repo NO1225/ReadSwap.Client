@@ -131,7 +131,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         />
                     </View>
                     <View>
-                        <IconButton name="arrow-left" onPress={nextHundler} />
+                        <IconButton locked name={useLocale({},"direction")=="rtl"?"arrow-left":"arrow-right"} onClick={nextHundler} />
                     </View>
 
                 </View>),
@@ -166,8 +166,8 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         styles.rowFlex,
                         styles.spaceBetween,
                     ]}>
-                        <IconButton name="arrow-right" onPress={backHundler} />
-                        <IconButton name="check" onPress={finishHundler} />
+                        <IconButton locked name={useLocale({},"direction")=="rtl"?"arrow-right":"arrow-left"} onClick={backHundler} />
+                        <IconButton locked name="check" onClick={finishHundler} />
                     </View>
 
                 </View>
