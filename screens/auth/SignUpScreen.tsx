@@ -10,6 +10,8 @@ import StagesLayout from '../../components/layouts/StagesLayout';
 import { FontSize } from '../../constants/FontSize';
 import InputWithLabel from '../../components/customComponent/InputWithLabel';
 import IconButton from '../../components/customComponent/IconButton';
+import validator from 'validator';
+import { useLocalErrorMessage } from '../../hooks/useLocalErrorMessage';
 
 export default function SignUpScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignUpScreen"> }) {
     const styles = StyleSheet.create({
@@ -17,12 +19,12 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
             paddingTop: 35,
             alignItems: "center",
         },
-        
+
         titleText: {
             fontSize: FontSize.Large
         },
-       
-       
+
+
         center: {
             width: '100%',
             alignItems: "center",
@@ -31,14 +33,14 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         flex1: {
             flex: 1
         },
-        rowFlex:{
+        rowFlex: {
             flexDirection: "row"
         },
-        spaceBetween:{
+        spaceBetween: {
             justifyContent: "space-between"
         },
-        fullWidth:{
-            width:'100%'
+        fullWidth: {
+            width: '100%'
         }
     })
 
@@ -49,19 +51,56 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
     const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>("");
 
     const [confirmPassward, setConfirmPassward] = useState<string>("");
+    const [confirmPasswardErrorMessage, setConfirmPasswardErrorMessage] = useState<string>("");
 
 
-    const checkEmail = async () => {
+    const checkEmail = async (): Promise<boolean> => {
+        let result: boolean = true;
+        if (validator.isEmail(email) == false) {
+            setEmailErrorMessage(useLocalErrorMessage({}, "invalidEmail"));
+            result = false;
+        }
+        else
+            setEmailErrorMessage("");
+
+        if (result == false)
+            return false;
 
         let response = await checkEmailService(email);
 
-        return response.data.exists == false;
-    }
+        // if(response.success == false)
+        // {
+        //     response.errors
+        // }
 
-    const signUp = async () => {
-        if (passward != confirmPassward) {
+        if (response.data.exists) {
+            setEmailErrorMessage(useLocalErrorMessage({}, "emailAlreadyExist"));
             return false;
         }
+
+        return result;
+    }
+
+    const signUp = async (): Promise<boolean> => {
+        let result: boolean = true;
+
+        if (validator.equals(passward, confirmPassward) == false) {
+            setConfirmPasswardErrorMessage(useLocalErrorMessage({}, "confirmPasswardDoesntMatch"))
+            result = false;
+        }
+        else
+            setConfirmPasswardErrorMessage("");
+
+        if (validator.isLength(passward, { min: 8, max: 20 }) == false) {
+            setPasswardErrorMessage(useLocalErrorMessage({}, "passwardLength"))
+            result = false;
+        }
+        else
+            setPasswardErrorMessage("");
+
+        if (result == false)
+            return result;
+
         let response = await signUpService(
             email,
             passward
@@ -92,7 +131,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         />
                     </View>
                     <View>
-                        <IconButton name="arrow-left" onPress={nextHundler}/>
+                        <IconButton name="arrow-left" onPress={nextHundler} />
                     </View>
 
                 </View>),
@@ -109,15 +148,15 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         <InputWithLabel
                             errorMessage={passwardErrorMessage}
                             label={useLocale({}, "passwardLabel")}
-                            setValue={(value: string) => setPassward(value)} 
+                            setValue={(value: string) => setPassward(value)}
                             value={passward}
                             secureTextEntry
                             placeholder={useLocale({}, "passwardLabel")}
                         />
                         <InputWithLabel
-                            errorMessage=""
+                            errorMessage={confirmPasswardErrorMessage}
                             label={useLocale({}, "confirmPasswardLabel")}
-                            setValue={(value: string) => setConfirmPassward(value)} 
+                            setValue={(value: string) => setConfirmPassward(value)}
                             value={confirmPassward}
                             secureTextEntry
                             placeholder={useLocale({}, "confirmPasswardLabel")}
@@ -127,12 +166,12 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         styles.rowFlex,
                         styles.spaceBetween,
                     ]}>
-                        <IconButton name="arrow-right" onPress={backHundler}/>
-                        <IconButton name="check" onPress={finishHundler}/>
+                        <IconButton name="arrow-right" onPress={backHundler} />
+                        <IconButton name="check" onPress={finishHundler} />
                     </View>
 
                 </View>
-                   ),
+                ),
             Verifyier: async () => true,
             Submit: signUp
         }
