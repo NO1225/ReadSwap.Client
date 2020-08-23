@@ -17,6 +17,8 @@ export default {
     emailLabel: "E-mail",
     passwardLabel: "Passward",
     confirmPasswardLabel: "Confirm Passward",
+    signingInHeader: "Sign In to Your Account",
+
   },
   ar: {
     direction: "rtl",
@@ -35,6 +37,7 @@ export default {
     emailLabel: "البريد الالكتروني",
     passwardLabel:"كلمة المرور",
     confirmPasswardLabel: "تأكيد كلمة المرور",
+    signingInHeader: "تسجيل الدخول الى حسابك",
 
 
   },
