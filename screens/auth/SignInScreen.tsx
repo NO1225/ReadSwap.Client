@@ -1,24 +1,21 @@
-import React, { useContext, useState } from 'react'
-import { StyleSheet, Button} from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet} from 'react-native'
 import { View } from "../../components/themed/View";
 import { Text } from "../../components/themed/Text";
-import { ScreenContext } from '../../contexts/ScreenContext';
 import { useLocale } from '../../hooks/useLocale';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { FontSize } from '../../constants/FontSize';
 import validator from 'validator';
 import { useLocalErrorMessage } from '../../hooks/useLocalErrorMessage';
-import { checkEmailService } from '../../services/checkEmailService';
+import { checkEmailService } from '../../services/apiCalls/checkEmailService';
 import InputWithLabel from '../../components/customComponent/InputWithLabel';
 import IconButton from '../../components/customComponent/IconButton';
 import StagesLayout from '../../components/layouts/StagesLayout';
-import { signInService } from '../../services/signInService';
-import { saveAccessTokenService } from '../../services/storageServices/saveAccessTokenService';
-import { saveRefreshTokenService } from '../../services/storageServices/saveRefreshTokenService';
+
+import { signInService } from '../../services/apiCalls/signInService';
+import { signIn } from '../../services/navigation/signIn';
 
 export default function SignInScreen({navigation}:{navigation:StackNavigationProp<AuthNavigationParamList,"SignInScreen">}) {
-
-    const screenContext = useContext(ScreenContext);
 
     const styles = StyleSheet.create({
         container: {
@@ -56,6 +53,9 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
     const [passward, setPassward] = useState<string>("");
     const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>("");
 
+    const [accessToken, setAccessToken] = useState("");
+    const [refreshToken, setRefreshToken] = useState("");
+
     const checkEmail = async (): Promise<boolean> => {
         let result: boolean = true;
         if (validator.isEmail(email) == false) {
@@ -82,7 +82,7 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
 
         return result;
     }
-    const signIn = async (): Promise<boolean> => {
+    const checkPassward = async (): Promise<boolean> => {
         
         let result: boolean = true;
 
@@ -93,8 +93,8 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
 
         if(response.success == true)
         {
-            await saveAccessTokenService(response.data.accessToken);
-            await saveRefreshTokenService(response.data.refreshToken);
+            setAccessToken(response.data.accessToken);
+            setRefreshToken(response.data.refreshToken);
         
             return true
         }
@@ -103,11 +103,8 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
     }
 
 
-    const onSuccess = () => {
-        if(screenContext.setCurrentScreen!=undefined)
-        {   
-            screenContext.setCurrentScreen("Main");
-        }
+    const onSuccess = async () => {
+        await signIn(accessToken,refreshToken);
     }
 
     const Stages: Stage[] = [
@@ -161,7 +158,7 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
                 </View>
                 ),
             Verifyier: async () => true,
-            Submit: signIn
+            Submit: checkPassward
         }
     ]
     return (

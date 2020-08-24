@@ -3,8 +3,8 @@ import { StyleSheet, Button } from 'react-native'
 import { View } from "../../components/themed/View";
 import { Text } from "../../components/themed/Text";
 import { useLocale } from '../../hooks/useLocale';
-import { checkEmailService } from '../../services/checkEmailService';
-import { signUpService } from '../../services/signUpService';
+import { checkEmailService } from '../../services/apiCalls/checkEmailService';
+import { signUpService } from '../../services/apiCalls/signUpService';
 import { StackNavigationProp } from '@react-navigation/stack';
 import StagesLayout from '../../components/layouts/StagesLayout';
 import { FontSize } from '../../constants/FontSize';

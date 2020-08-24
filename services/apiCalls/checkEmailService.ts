@@ -1,5 +1,5 @@
 import axios from "axios";
-import ApiRoutes from "../constants/ApiRoutes";
+import ApiRoutes from "../../constants/ApiRoutes";
 
 export async function checkEmailService(email:string)
 {

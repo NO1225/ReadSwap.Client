@@ -3,6 +3,7 @@ import { StyleSheet, Button } from 'react-native'
 import { View } from "../../components/themed/View"
 import { Text } from "../../components/themed/Text"
 import { StackNavigationProp } from '@react-navigation/stack'
+import { signOut } from '../../services/navigation/signOut'
 
 export default function MyCollectionScreen({navigation}:{navigation:StackNavigationProp<CollectionParamList>}) {
 
@@ -22,6 +23,10 @@ export default function MyCollectionScreen({navigation}:{navigation:StackNavigat
             <Button title='Go to Details' onPress={navigateToDetails} />
             <Button title='Go to Request' onPress={navigateToRequest} />
             <Button title='Go to New' onPress={navigateToNew} />
+            <Button title='signOut' onPress={()=>{
+                console.log("signing out");
+                signOut();
+            }} />
         </View>
     )
 }
