@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { StyleSheet} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet,TouchableOpacity } from 'react-native'
 import { View } from "../../components/themed/View";
 import { Text } from "../../components/themed/Text";
 import { useLocale } from '../../hooks/useLocale';
@@ -14,8 +14,11 @@ import StagesLayout from '../../components/layouts/StagesLayout';
 
 import { signInService } from '../../services/apiCalls/signInService';
 import { signIn } from '../../services/navigation/signIn';
+import { saveAccessTokenService } from '../../services/storageServices/saveAccessTokenService';
+import { saveRefreshTokenService } from '../../services/storageServices/saveRefreshTokenService';
+import { tokenSignIn } from '../../services/navigation/tokenSignIn';
 
-export default function SignInScreen({navigation}:{navigation:StackNavigationProp<AuthNavigationParamList,"SignInScreen">}) {
+export default function SignInScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignInScreen"> }) {
 
     const styles = StyleSheet.create({
         container: {
@@ -53,8 +56,7 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
     const [passward, setPassward] = useState<string>("");
     const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>("");
 
-    const [accessToken, setAccessToken] = useState("");
-    const [refreshToken, setRefreshToken] = useState("");
+    
 
     const checkEmail = async (): Promise<boolean> => {
         let result: boolean = true;
@@ -83,7 +85,7 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
         return result;
     }
     const checkPassward = async (): Promise<boolean> => {
-        
+
         let result: boolean = true;
 
         let response = await signInService(
@@ -91,11 +93,11 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
             passward
         )
 
-        if(response.success == true)
-        {
-            setAccessToken(response.data.accessToken);
-            setRefreshToken(response.data.refreshToken);
-        
+        if (response.success == true) {
+
+            await saveAccessTokenService(response.data.accessToken);
+            await saveRefreshTokenService(response.data.refreshToken);
+
             return true
         }
 
@@ -104,7 +106,7 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
 
 
     const onSuccess = async () => {
-        await signIn(accessToken,refreshToken);
+        await signIn();
     }
 
     const Stages: Stage[] = [
@@ -124,7 +126,7 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
                         />
                     </View>
                     <View>
-                        <IconButton locked name={useLocale({},"direction")=="rtl"?"arrow-left":"arrow-right"} onClick={nextHundler} />
+                        <IconButton locked name={useLocale({}, "direction") == "rtl" ? "arrow-left" : "arrow-right"} onClick={nextHundler} />
                     </View>
 
                 </View>),
@@ -145,13 +147,13 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
                             value={passward}
                             secureTextEntry
                             placeholder={useLocale({}, "passwardLabel")}
-                        />                       
+                        />
                     </View>
                     <View style={[
                         styles.rowFlex,
                         styles.spaceBetween,
                     ]}>
-                        <IconButton locked name={useLocale({},"direction")=="rtl"?"arrow-right":"arrow-left"} onClick={backHundler} />
+                        <IconButton locked name={useLocale({}, "direction") == "rtl" ? "arrow-right" : "arrow-left"} onClick={backHundler} />
                         <IconButton locked willDie name="check" onClick={finishHundler} />
                     </View>
 
@@ -160,7 +162,15 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
             Verifyier: async () => true,
             Submit: checkPassward
         }
-    ]
+    ];
+
+
+    useEffect(() => {
+        tokenSignIn();
+        return () => {
+        }
+    }, []);
+    
     return (
         <View style={[
             styles.container,
@@ -169,6 +179,9 @@ export default function SignInScreen({navigation}:{navigation:StackNavigationPro
             <View >
                 <Text style={styles.titleText}>{useLocale({}, "signingInHeader")}</Text>
             </View>
+            <TouchableOpacity onPress={()=>navigation.navigate("SignUpScreen")}>
+                <Text style={styles.titleText}>{useLocale({}, "goToSignUp")}</Text>
+            </TouchableOpacity>
 
             <StagesLayout Stages={Stages} onFinish={onSuccess} />
 

@@ -18,6 +18,7 @@ export default {
     passwardLabel: "Passward",
     confirmPasswardLabel: "Confirm Passward",
     signingInHeader: "Sign In to Your Account",
+    goToSignUp: "New User?? Create a New Account!!",
 
   },
   ar: {
@@ -38,6 +39,7 @@ export default {
     passwardLabel:"كلمة المرور",
     confirmPasswardLabel: "تأكيد كلمة المرور",
     signingInHeader: "تسجيل الدخول الى حسابك",
+    goToSignUp: "مستخدم جديد؟؟ انشئ حسابك الان!!",
 
 
   },
