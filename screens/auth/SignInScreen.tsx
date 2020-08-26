@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet,TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import { View } from "../../components/themed/View";
 import { Text } from "../../components/themed/Text";
 import { useLocale } from '../../hooks/useLocale';
@@ -17,6 +17,8 @@ import { signIn } from '../../services/navigation/signIn';
 import { saveAccessTokenService } from '../../services/storageServices/saveAccessTokenService';
 import { saveRefreshTokenService } from '../../services/storageServices/saveRefreshTokenService';
 import { tokenSignIn } from '../../services/navigation/tokenSignIn';
+import Loading from '../../components/Loading';
+import TextButton from '../../components/themed/TextButton';
 
 export default function SignInScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignInScreen"> }) {
 
@@ -56,7 +58,8 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
     const [passward, setPassward] = useState<string>("");
     const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>("");
 
-    
+    const [loaded, setLoaded] = useState(false);
+
 
     const checkEmail = async (): Promise<boolean> => {
         let result: boolean = true;
@@ -107,6 +110,14 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
     const onSuccess = async () => {
         await signIn();
+    }
+
+    const manageTokenSignIn = async (success: boolean) => {
+      
+        if (success)
+            signIn();
+        else
+            setLoaded(true)
     }
 
     const Stages: Stage[] = [
@@ -164,28 +175,29 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
         }
     ];
 
+    if (loaded == false) {
+        return <Loading onStart={tokenSignIn} onFinish={manageTokenSignIn} />
+    } else {
+        return (
+            <View style={[
+                styles.container,
+                styles.flex1
+            ]}>
+                <View >
+                    <Text style={styles.titleText}>{useLocale({}, "signingInHeader")}</Text>
+                </View>
+                <TextButton
+                    text={useLocale({}, "goToSignUp")}
+                    onClick={async () => navigation.navigate("SignUpScreen")}
+                />
 
-    useEffect(() => {
-        tokenSignIn();
-        return () => {
-        }
-    }, []);
-    
-    return (
-        <View style={[
-            styles.container,
-            styles.flex1
-        ]}>
-            <View >
-                <Text style={styles.titleText}>{useLocale({}, "signingInHeader")}</Text>
+
+                <StagesLayout Stages={Stages} onFinish={onSuccess} />
+
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate("SignUpScreen")}>
-                <Text style={styles.titleText}>{useLocale({}, "goToSignUp")}</Text>
-            </TouchableOpacity>
+        )
+    }
 
-            <StagesLayout Stages={Stages} onFinish={onSuccess} />
 
-        </View>
-    )
 }
 
