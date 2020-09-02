@@ -8,6 +8,7 @@ import MainNavigation from './MainNavigation';
 import { ScreenContext } from '../contexts/ScreenContext';
 import { useContext } from 'react';
 import AuthNavigation from './AuthNavigation';
+import ProfileNavigation from './ProfileNavigation';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -30,6 +31,15 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
         linking={LinkingConfiguration}
         theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <RootNavigator childComponent={MainNavigation} />
+      </NavigationContainer>
+    );
+  }
+  else if (screenContext.currentScreen == "Profile") {
+    return (
+      <NavigationContainer
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <RootNavigator childComponent={ProfileNavigation} />
       </NavigationContainer>
     );
   }

@@ -8,12 +8,24 @@ import Navigation from './navigation/Navigation';
 import { ScreenContext } from './contexts/ScreenContext';
 import AppContent from './components/containers/AppContent';
 import appConetentRef from './references/appContentRef';
+import { getMyProfileService } from './services/apiCalls/getMyProfileService';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
   const [currentScreen, setCurrentScreen] = useState<CurrentScreen>('Auth');
+
+  const signIn = async () => {
+    let profile = await getMyProfileService();
+    console.log(profile);
+    if (profile.data == null) {
+      setCurrentScreen("Profile");
+    }
+    else {
+      setCurrentScreen("Main")
+    }
+  }
 
   if (!isLoadingComplete) {
     return null;
@@ -23,7 +35,7 @@ export default function App() {
         <ScreenContext.Provider value={{ currentScreen, setCurrentScreen }} >
           <AppContent
             ref={appConetentRef}
-            signIn={() => setCurrentScreen("Main")}
+            signIn={signIn}
             signOut={() => setCurrentScreen("Auth")}>
             <Navigation colorScheme={colorScheme} />
             <StatusBar />

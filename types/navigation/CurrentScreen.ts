@@ -1,2 +1,2 @@
-type CurrentScreen = "Auth" | "Main";
+type CurrentScreen = "Auth" | "Profile" | "Main";
 

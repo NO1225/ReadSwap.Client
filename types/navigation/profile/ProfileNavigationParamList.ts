@@ -1,0 +1,3 @@
+type ProfileNavigationParamList = {
+    ProfileScreen:undefined;
+}
