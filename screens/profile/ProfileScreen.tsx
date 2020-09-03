@@ -12,6 +12,8 @@ import InputWithLabel from '../../components/customComponent/InputWithLabel';
 import IconButton from '../../components/customComponent/IconButton';
 import validator from 'validator';
 import { useLocalErrorMessage } from '../../hooks/useLocalErrorMessage';
+import { createMyProfileService } from '../../services/apiCalls/createMyProfileService';
+import { signIn } from '../../services/navigation/signIn';
 
 export default function ProfileScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignUpScreen"> }) {
     const styles = StyleSheet.create({
@@ -45,65 +47,36 @@ export default function ProfileScreen({ navigation }: { navigation: StackNavigat
     })
 
 
-    const [email, setEmail] = useState<string>("");
-    const [emailErrorMessage, setEmailErrorMessage] = useState<string>("");
-    const [passward, setPassward] = useState<string>("");
-    const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>("");
+    const [firstName, setFirstName] = useState<string>("");
+    const [firstNameErrorMessage, setFirstNameErrorMessage] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [lastNameErrorMessage, setLastNameErrorMessage] = useState<string>("");
 
-    const [confirmPassward, setConfirmPassward] = useState<string>("");
-    const [confirmPasswardErrorMessage, setConfirmPasswardErrorMessage] = useState<string>("");
+    const [address, setAddress] = useState<string>("");
+    const [addressErrorMessage, setAddressErrorMessage] = useState<string>("");
 
 
-    const checkEmail = async (): Promise<boolean> => {
-        let result: boolean = true;
-        if (validator.isEmail(email) == false) {
-            setEmailErrorMessage(useLocalErrorMessage({}, "invalidEmail"));
-            result = false;
-        }
-        else
-            setEmailErrorMessage("");
-
-        if (result == false)
-            return false;
-
-        let response = await checkEmailService(email);
-
-        // if(response.success == false)
-        // {
-        //     response.errors
-        // }
-
-        if (response.data.exists) {
-            setEmailErrorMessage(useLocalErrorMessage({}, "emailAlreadyExist"));
-            return false;
-        }
-
-        return result;
+    const checkFirstName = async (): Promise<boolean> => {
+        return true;
     }
 
-    const signUp = async (): Promise<boolean> => {
-        let result: boolean = true;
+    const checkLastName = async (): Promise<boolean> => {
+        return true;
+    }
 
-        if (validator.equals(passward, confirmPassward) == false) {
-            setConfirmPasswardErrorMessage(useLocalErrorMessage({}, "confirmPasswardDoesntMatch"))
-            result = false;
-        }
-        else
-            setConfirmPasswardErrorMessage("");
+    const checkAddress = async (): Promise<boolean> => {
+        return true;
+    }
 
-        if (validator.isLength(passward, { min: 8, max: 20 }) == false) {
-            setPasswardErrorMessage(useLocalErrorMessage({}, "passwardLength"))
-            result = false;
-        }
-        else
-            setPasswardErrorMessage("");
+    const createProfile = async (): Promise<boolean> => {
+        
 
-        if (result == false)
-            return result;
-
-        let response = await signUpService(
-            email,
-            passward
+        let response = await createMyProfileService(
+            {
+                firstName,
+                lastName,
+                address
+            }
         )
 
         return response.success;
@@ -111,7 +84,7 @@ export default function ProfileScreen({ navigation }: { navigation: StackNavigat
 
 
     const onSuccess = () => {
-        navigation.pop();
+        signIn();
     }
 
     const Stages: Stage[] = [
@@ -123,19 +96,19 @@ export default function ProfileScreen({ navigation }: { navigation: StackNavigat
                 ]}>
                     <View style={styles.center}>
                         <InputWithLabel
-                            errorMessage={emailErrorMessage}
-                            label={useLocale({}, "emailLabel")}
-                            setValue={(value: string) => setEmail(value)}
-                            value={email}
-                            placeholder={useLocale({}, "emailLabel")}
+                            errorMessage={firstNameErrorMessage}
+                            label={useLocale({}, "firstNameLabel")}
+                            setValue={(value: string) => setFirstName(value)}
+                            value={firstName}
+                            placeholder={useLocale({}, "firstNameLabel")}
                         />
                     </View>
                     <View>
-                        <IconButton locked name={useLocale({},"direction")=="rtl"?"arrow-left":"arrow-right"} onClick={nextHundler} />
+                        <IconButton locked name={useLocale({}, "direction") == "rtl" ? "arrow-left" : "arrow-right"} onClick={nextHundler} />
                     </View>
 
                 </View>),
-            Verifyier: checkEmail,
+            Verifyier: checkFirstName,
             Submit: async () => true
         },
         {
@@ -146,34 +119,52 @@ export default function ProfileScreen({ navigation }: { navigation: StackNavigat
                 ]}>
                     <View style={styles.center}>
                         <InputWithLabel
-                            errorMessage={passwardErrorMessage}
-                            label={useLocale({}, "passwardLabel")}
-                            setValue={(value: string) => setPassward(value)}
-                            value={passward}
-                            secureTextEntry
-                            placeholder={useLocale({}, "passwardLabel")}
-                        />
-                        <InputWithLabel
-                            errorMessage={confirmPasswardErrorMessage}
-                            label={useLocale({}, "confirmPasswardLabel")}
-                            setValue={(value: string) => setConfirmPassward(value)}
-                            value={confirmPassward}
-                            secureTextEntry
-                            placeholder={useLocale({}, "confirmPasswardLabel")}
+                            errorMessage={lastNameErrorMessage}
+                            label={useLocale({}, "lastNameLabel")}
+                            setValue={(value: string) => setLastName(value)}
+                            value={lastName}
+                            placeholder={useLocale({}, "lastNameLabel")}
                         />
                     </View>
                     <View style={[
                         styles.rowFlex,
                         styles.spaceBetween,
                     ]}>
-                        <IconButton locked name={useLocale({},"direction")=="rtl"?"arrow-right":"arrow-left"} onClick={backHundler} />
+                        <IconButton locked name={useLocale({}, "direction") == "rtl" ? "arrow-right" : "arrow-left"} onClick={backHundler} />
+                        <IconButton locked name={useLocale({}, "direction") == "rtl" ? "arrow-left" : "arrow-right"} onClick={nextHundler} />
+                    </View>
+
+                </View>),
+            Verifyier: checkLastName,
+            Submit: async () => true
+        },
+        {
+            Component: (nextHundler, backHundler, finishHundler) =>
+                (<View style={[
+                    styles.flex1,
+                    styles.center
+                ]}>
+                    <View style={styles.center}>
+                        <InputWithLabel
+                            errorMessage={addressErrorMessage}
+                            label={useLocale({}, "addressLabel")}
+                            setValue={(value: string) => setAddress(value)}
+                            value={address}
+                            placeholder={useLocale({}, "addressLabel")}
+                        />
+                    </View>
+                    <View style={[
+                        styles.rowFlex,
+                        styles.spaceBetween,
+                    ]}>
+                        <IconButton locked name={useLocale({}, "direction") == "rtl" ? "arrow-right" : "arrow-left"} onClick={backHundler} />
                         <IconButton locked name="check" onClick={finishHundler} />
                     </View>
 
                 </View>
                 ),
-            Verifyier: async () => true,
-            Submit: signUp
+            Verifyier: checkAddress,
+            Submit: createProfile
         }
     ]
     return (

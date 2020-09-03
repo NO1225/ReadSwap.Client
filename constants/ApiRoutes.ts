@@ -4,5 +4,7 @@ export default {
   signUp: API_URL + "/api/Auth/SignUp",
   signIn: API_URL + "/api/Auth/SignIn",
   refreshToken: API_URL + "/api/Token/Refresh",
+
   getMyProfile: API_URL + "/api/Profile/GetMyProfile",
+  createMyProfile: API_URL + "/api/Profile/CreateMyProfile",
 };

@@ -20,6 +20,9 @@ export default {
     confirmPasswardLabel: "Confirm Passward",
     signingInHeader: "Sign In to Your Account",
     goToSignUp: "New User?? Create a New Account!!",
+    firstNameLabel:"Enter First Name:",
+    lastNameLabel:"Enter Last Name:",
+    addressLabel:"Enter Address:",
 
   },
   ar: {
@@ -42,7 +45,9 @@ export default {
     confirmPasswardLabel: "تأكيد كلمة المرور",
     signingInHeader: "تسجيل الدخول الى حسابك",
     goToSignUp: "مستخدم جديد؟؟ انشئ حسابك الان!!",
-
+    firstNameLabel:"ادخل الاسم الاول:",
+    lastNameLabel:"ادخل الاسم الاخير:",
+    addressLabel:"ادخل عنوانك:",
 
   },
 };
