@@ -19,7 +19,11 @@ export default function App() {
   const signIn = async () => {
     let profile = await getMyProfileService();
     console.log(profile);
-    if (profile.data == null) {
+    if(profile == null)
+    {
+      setCurrentScreen("Auth");
+    }
+    else if (profile.data == null) {
       setCurrentScreen("Profile");
     }
     else {

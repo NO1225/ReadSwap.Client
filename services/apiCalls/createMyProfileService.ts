@@ -12,12 +12,16 @@ export async function createMyProfileService(body:createProfileBody)
 {   
     let token = await getAccessTokenForUsageService();
 
+    if(token==null)
+    {
+        return null;
+    }
+
     let response = await axios.post<BaseResponse>(ApiRoutes.createMyProfile,body,{
         headers:{
             Authorization:`Bearer ${token}`
         }
     })
 
-    console.log(response);
     return response.data;
 }

@@ -4,7 +4,6 @@ import { getRefreshTokenService } from "../storageServices/getRefreshTokenServic
 import { getAccessTokenService } from "../storageServices/getAccessTokenService";
 import { saveAccessTokenService } from "../storageServices/saveAccessTokenService";
 import { saveRefreshTokenService } from "../storageServices/saveRefreshTokenService";
-import { signOut } from "../navigation/signOut";
 
 export async function manageAccessTokenService(): Promise<boolean> {
     let accessToken = await getAccessTokenService();
@@ -15,17 +14,13 @@ export async function manageAccessTokenService(): Promise<boolean> {
         let refreshToken = await getRefreshTokenService();
         if (refreshToken != "" && accessToken != "") {
             let response = await refreshTokensService(accessToken, refreshToken);
-            if (response == null) {
-                signOut();
-            }
-            else {
+            if (response != null) {               
                 if (response.success) {
                     await saveAccessTokenService(accessToken);
                     await saveRefreshTokenService(refreshToken);
                     return true;
                 }
             }
-
         }
     }
     return false;

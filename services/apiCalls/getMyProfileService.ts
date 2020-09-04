@@ -5,6 +5,10 @@ import { getAccessTokenForUsageService } from "../helper/getAccessTokenForUsageS
 export async function getMyProfileService()
 {   
     let token = await getAccessTokenForUsageService();
+    if(token == null)
+    {
+        return null;
+    }
 
     let response = await axios.get<ResponseWithData<ProfileData>>(ApiRoutes.getMyProfile,{
         headers:{
@@ -12,6 +16,5 @@ export async function getMyProfileService()
         }
     })
 
-    console.log(response);
     return response.data;
 }

@@ -48,12 +48,15 @@ export default function StagesLayout({ Stages, onFinish }: { Stages: Stage[], on
 
 
     const finishHundler = async () => {
-        if (await Stages[currentStage].Submit()) {
-            onFinish();
-        }
-        else {
+        if (await Stages[currentStage].Verifyier()) {
+            if (await Stages[currentStage].Submit()) {
+                onFinish();
+            }
+            else {
 
+            }
         }
+
     }
 
 

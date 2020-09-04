@@ -1,10 +1,9 @@
 import { getAccessTokenService } from "../storageServices/getAccessTokenService";
 import { manageAccessTokenService } from "./manageAccessTokenService";
-import { signOut } from "../navigation/signOut";
 
-export async function getAccessTokenForUsageService(): Promise<string> {
+export async function getAccessTokenForUsageService(): Promise<string|null> {
     if (await manageAccessTokenService() == false) {
-        signOut();
+        return null;
     }
     let token = await getAccessTokenService();
 

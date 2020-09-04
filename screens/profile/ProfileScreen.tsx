@@ -14,6 +14,7 @@ import validator from 'validator';
 import { useLocalErrorMessage } from '../../hooks/useLocalErrorMessage';
 import { createMyProfileService } from '../../services/apiCalls/createMyProfileService';
 import { signIn } from '../../services/navigation/signIn';
+import { signOut } from '../../services/navigation/signOut';
 
 export default function ProfileScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignUpScreen"> }) {
     const styles = StyleSheet.create({
@@ -57,19 +58,51 @@ export default function ProfileScreen({ navigation }: { navigation: StackNavigat
 
 
     const checkFirstName = async (): Promise<boolean> => {
+        setFirstNameErrorMessage("");
+        if(validator.isEmpty(firstName))
+        {
+            setFirstNameErrorMessage(useLocalErrorMessage({},"required"));
+            return false;
+        }
+        if(validator.isLength(firstName,{min:0,max:50}) == false)
+        {
+            setFirstNameErrorMessage(useLocalErrorMessage({},"lengthMustBeLess") + "50");
+            return false;
+        }
         return true;
     }
 
     const checkLastName = async (): Promise<boolean> => {
+        setLastNameErrorMessage("");
+        if(validator.isEmpty(lastName))
+        {
+            setLastNameErrorMessage(useLocalErrorMessage({},"required"));
+            return false;
+        }
+        if(validator.isLength(lastName,{min:0,max:50}) == false)
+        {
+            setLastNameErrorMessage(useLocalErrorMessage({},"lengthMustBeLess") + "50");
+            return false;
+        }
         return true;
     }
 
     const checkAddress = async (): Promise<boolean> => {
+        setAddressErrorMessage("");
+        if(validator.isEmpty(address))
+        {
+            setAddressErrorMessage(useLocalErrorMessage({},"required"));
+            return false;
+        }
+        if(validator.isLength(address,{min:0,max:200}) == false)
+        {
+            setAddressErrorMessage(useLocalErrorMessage({},"lengthMustBeLess") + "200");
+            return false;
+        }
         return true;
     }
 
-    const createProfile = async (): Promise<boolean> => {
-        
+    const createProfile = async (): Promise<boolean> => {        
 
         let response = await createMyProfileService(
             {
@@ -78,6 +111,12 @@ export default function ProfileScreen({ navigation }: { navigation: StackNavigat
                 address
             }
         )
+
+        if(response == null)
+        {
+            signOut();
+            return false;
+        }
 
         return response.success;
     }
