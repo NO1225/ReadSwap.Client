@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './BottomTabNavigator';
 import SettingsScreen from '../screens/settings/SettingsScreen';
 import { useLocale } from '../hooks/useLocale';
+import SettingsStack from './settings/SettingsStack';
 
 const MainStack = createStackNavigator<MainNavigationParamList>();
 
@@ -19,7 +20,7 @@ export default function MainNavigation() {
             />
             <MainStack.Screen
                 name="Settings"
-                component={SettingsScreen}
+                component={SettingsStack}
                 options={{ headerTitle: useLocale({},"settingsHeader") }}
             />
         </MainStack.Navigator>

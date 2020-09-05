@@ -1,0 +1,4 @@
+type SettingsStackParameterList = {
+    SettingsScreen: undefined;
+    
+};

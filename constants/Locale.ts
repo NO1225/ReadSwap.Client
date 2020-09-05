@@ -23,6 +23,10 @@ export default {
     firstNameLabel:"Enter First Name:",
     lastNameLabel:"Enter Last Name:",
     addressLabel:"Enter Address:",
+    profileTitle:"User Info",
+    viewFirstNameLabel:"First Name:",
+    viewLastNameLabel:"Last Name:",
+    viewAddressLabel:"Address:",
 
   },
   ar: {
@@ -48,6 +52,9 @@ export default {
     firstNameLabel:"ادخل الاسم الاول:",
     lastNameLabel:"ادخل الاسم الاخير:",
     addressLabel:"ادخل عنوانك:",
-
+    profileTitle:"معلومات المستخدم",
+    viewFirstNameLabel:"الاسم الاول:",
+    viewLastNameLabel:"الاسم الاخير:",
+    viewAddressLabel:"العنوان:",
   },
 };

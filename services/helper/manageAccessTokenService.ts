@@ -16,8 +16,8 @@ export async function manageAccessTokenService(): Promise<boolean> {
             let response = await refreshTokensService(accessToken, refreshToken);
             if (response != null) {               
                 if (response.success) {
-                    await saveAccessTokenService(accessToken);
-                    await saveRefreshTokenService(refreshToken);
+                    await saveAccessTokenService(response.data.accessToken);
+                    await saveRefreshTokenService(response.data.refreshToken);
                     return true;
                 }
             }
