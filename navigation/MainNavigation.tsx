@@ -21,7 +21,7 @@ export default function MainNavigation() {
             <MainStack.Screen
                 name="Settings"
                 component={SettingsStack}
-                options={{ headerTitle: useLocale({},"settingsHeader") }}
+                options={{ headerShown: false, }}
             />
         </MainStack.Navigator>
     )

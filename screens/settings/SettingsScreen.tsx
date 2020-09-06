@@ -9,8 +9,9 @@ import { useLocale } from '../../hooks/useLocale'
 import { FontSize } from '../../constants/FontSize'
 import { getMyProfileService } from '../../services/apiCalls/getMyProfileService'
 import TextWithLabel from '../../components/customComponent/TextWithLabel'
+import { StackNavigationProp } from '@react-navigation/stack'
 
-export default function SettingsScreen() {
+export default function SettingsScreen({navigation}:{navigation:StackNavigationProp<SettingsStackParameterList,"SettingsScreen">}) {
     const styles = StyleSheet.create({
         container: {
             paddingTop: 35,
@@ -83,7 +84,7 @@ export default function SettingsScreen() {
                 <View style={[styles.flex1, styles.fullWidth]}>
                     <View style={[styles.rowFlex, styles.spaceAround]}>
                         <IconButton name={"sign-out"} onClick={async () => { signOut(); }} />
-                        <IconButton name={"key"} onClick={async () => { }} />
+                        <IconButton name={"key"} onClick={async () => {navigation.navigate("ChangePasswordScreen") }} />
                         <IconButton name={"edit"} onClick={async () => {}} />
                     </View>
                 </View>

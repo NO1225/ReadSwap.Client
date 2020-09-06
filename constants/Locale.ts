@@ -27,7 +27,9 @@ export default {
     viewFirstNameLabel:"First Name:",
     viewLastNameLabel:"Last Name:",
     viewAddressLabel:"Address:",
-
+    changePasswordHeader: "Change Password",
+    oldPasswordLabel: "Old Password:",
+    newPasswordLabel: "New Password:",
   },
   ar: {
     direction: "rtl",
@@ -56,5 +58,8 @@ export default {
     viewFirstNameLabel:"الاسم الاول:",
     viewLastNameLabel:"الاسم الاخير:",
     viewAddressLabel:"العنوان:",
+    changePasswordHeader: "تغيير كلمة المرور",
+    oldPasswordLabel: "كلمة السر القديمة:",
+    newPasswordLabel: "كلمة السر الجديدة:",
   },
 };
