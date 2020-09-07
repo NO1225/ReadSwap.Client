@@ -30,6 +30,7 @@ export default {
     changePasswordHeader: "Change Password",
     oldPasswordLabel: "Old Password:",
     newPasswordLabel: "New Password:",
+    changeProfileHeader: "Change User Info",
   },
   ar: {
     direction: "rtl",
@@ -61,5 +62,7 @@ export default {
     changePasswordHeader: "تغيير كلمة المرور",
     oldPasswordLabel: "كلمة السر القديمة:",
     newPasswordLabel: "كلمة السر الجديدة:",
+    changeProfileHeader: "تغيير معلومات المستخدم",
+
   },
 };

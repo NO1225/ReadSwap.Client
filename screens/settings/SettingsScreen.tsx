@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from "../../components/themed/View"
 import { Text } from "../../components/themed/Text"
@@ -11,7 +11,7 @@ import { getMyProfileService } from '../../services/apiCalls/getMyProfileService
 import TextWithLabel from '../../components/customComponent/TextWithLabel'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-export default function SettingsScreen({navigation}:{navigation:StackNavigationProp<SettingsStackParameterList,"SettingsScreen">}) {
+export default function SettingsScreen({ navigation }: { navigation: StackNavigationProp<SettingsStackParameterList, "SettingsScreen"> }) {
     const styles = StyleSheet.create({
         container: {
             paddingTop: 35,
@@ -65,6 +65,21 @@ export default function SettingsScreen({navigation}:{navigation:StackNavigationP
         return false;
     }
 
+    const updateProfileOnFocus = ()=>{
+        //console.log(loaded);
+        // TODO: Fix this
+        if (true ||  loaded == true) {
+            getUserProfile();
+        }
+    }
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', updateProfileOnFocus);
+
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [navigation]);
+
     if (loaded == false) {
         return <Loading onStart={getUserProfile} onFinish={async () => setLoaded(true)} />
     } else {
@@ -84,8 +99,8 @@ export default function SettingsScreen({navigation}:{navigation:StackNavigationP
                 <View style={[styles.flex1, styles.fullWidth]}>
                     <View style={[styles.rowFlex, styles.spaceAround]}>
                         <IconButton name={"sign-out"} onClick={async () => { signOut(); }} />
-                        <IconButton name={"key"} onClick={async () => {navigation.navigate("ChangePasswordScreen") }} />
-                        <IconButton name={"edit"} onClick={async () => {}} />
+                        <IconButton name={"key"} onClick={async () => { navigation.navigate("ChangePasswordScreen") }} />
+                        <IconButton name={"edit"} onClick={async () => { navigation.navigate("ChangeProfileScreen") }} />
                     </View>
                 </View>
 
