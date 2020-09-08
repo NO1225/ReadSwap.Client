@@ -10,6 +10,7 @@ import { FontSize } from '../../constants/FontSize'
 import { getMyProfileService } from '../../services/apiCalls/getMyProfileService'
 import TextWithLabel from '../../components/customComponent/TextWithLabel'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { revokeTokenService } from '../../services/apiCalls/revokeTokenService'
 
 export default function SettingsScreen({ navigation }: { navigation: StackNavigationProp<SettingsStackParameterList, "SettingsScreen"> }) {
     const styles = StyleSheet.create({
@@ -73,6 +74,11 @@ export default function SettingsScreen({ navigation }: { navigation: StackNaviga
         }
     }
 
+    const hundleSignOut = async ()=>{
+        await revokeTokenService();
+        await signOut(); 
+    }
+
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', updateProfileOnFocus);
 
@@ -98,7 +104,7 @@ export default function SettingsScreen({ navigation }: { navigation: StackNaviga
                 </View>
                 <View style={[styles.flex1, styles.fullWidth]}>
                     <View style={[styles.rowFlex, styles.spaceAround]}>
-                        <IconButton name={"sign-out"} onClick={async () => { signOut(); }} />
+                        <IconButton name={"sign-out"} onClick={hundleSignOut} />
                         <IconButton name={"key"} onClick={async () => { navigation.navigate("ChangePasswordScreen") }} />
                         <IconButton name={"edit"} onClick={async () => { navigation.navigate("ChangeProfileScreen") }} />
                     </View>
