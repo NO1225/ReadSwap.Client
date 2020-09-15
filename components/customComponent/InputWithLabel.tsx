@@ -7,14 +7,15 @@ import { useThemeColor } from '../../hooks/useThemeColor'
 import { TextInput } from '../themed/TextInput'
 
 export default function InputWithLabel(
-    {label,errorMessage,placeholder,value,setValue,secureTextEntry}:
+    {label,errorMessage,placeholder,value,setValue,secureTextEntry,numbersOnly}:
     {
         label:string,
         errorMessage:string,
         placeholder?:string,
         value:string,
         setValue:(value:string)=>void,
-        secureTextEntry?:boolean
+        secureTextEntry?:boolean,
+        numbersOnly?:boolean
     }) {
     const styles = StyleSheet.create({
         inputComponentContainer: {
@@ -33,7 +34,7 @@ export default function InputWithLabel(
         <View style={styles.inputComponentContainer}>
             <Text>{label}</Text>
             {errorMessage.length > 0 ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
-            <TextInput secureTextEntry={secureTextEntry} placeholder={placeholder} value={value} onChangeText={setValue} />
+            <TextInput keyboardType={numbersOnly?"numeric":"ascii-capable"} secureTextEntry={secureTextEntry} placeholder={placeholder} value={value} onChangeText={setValue} />
         </View>
     )
 }

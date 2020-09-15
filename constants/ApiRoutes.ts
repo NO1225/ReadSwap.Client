@@ -11,4 +11,9 @@ export default {
   getMyProfile: API_URL + "/api/Profile/GetMyProfile",
   createMyProfile: API_URL + "/api/Profile/CreateMyProfile",
   EditMyProfile: API_URL + "/api/Profile/EditMyProfile",
+
+
+  addBook: API_URL + "/api/Book/Add",
+
+
 };

@@ -69,14 +69,14 @@ export default function ChangePasswordScreen({navigation}:{navigation:StackNavig
         let result: boolean = true;
 
         if (validator.equals(newPassword, confirmPassword) == false) {
-            setConfirmPasswordErrorMessage(useLocalErrorMessage({}, "confirmPasswardDoesntMatch"))
+            setConfirmPasswordErrorMessage(useLocalErrorMessage({}, "confirmPasswordDoesntMatch"))
             result = false;
         }
         else
             setConfirmPasswordErrorMessage("");
 
         if (validator.isLength(newPassword, { min: 8, max: 20 }) == false) {
-            setNewPasswordErrorMessage(useLocalErrorMessage({}, "passwardLength"))
+            setNewPasswordErrorMessage(useLocalErrorMessage({}, "passwordLength"))
             result = false;
         }
         else
@@ -145,11 +145,11 @@ export default function ChangePasswordScreen({navigation}:{navigation:StackNavig
                         />
                         <InputWithLabel
                             errorMessage={confirmPasswordErrorMessage}
-                            label={useLocale({}, "confirmPasswardLabel")}
+                            label={useLocale({}, "confirmPasswordLabel")}
                             setValue={(value: string) => setConfirmPassword(value)}
                             value={confirmPassword}
                             secureTextEntry
-                            placeholder={useLocale({}, "confirmPasswardLabel")}
+                            placeholder={useLocale({}, "confirmPasswordLabel")}
                         />
                     </View>
                     <View style={[

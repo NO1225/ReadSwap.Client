@@ -55,8 +55,8 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
     const [email, setEmail] = useState<string>("");
     const [emailErrorMessage, setEmailErrorMessage] = useState<string>("");
-    const [passward, setPassward] = useState<string>("");
-    const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>("");
 
     const [loaded, setLoaded] = useState(false);
 
@@ -87,13 +87,13 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
         return result;
     }
-    const checkPassward = async (): Promise<boolean> => {
+    const checkPassword = async (): Promise<boolean> => {
 
         let result: boolean = true;
 
         let response = await signInService(
             email,
-            passward
+            password
         )
 
         if (response.success == true) {
@@ -152,12 +152,12 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                 ]}>
                     <View style={styles.center}>
                         <InputWithLabel
-                            errorMessage={passwardErrorMessage}
-                            label={useLocale({}, "passwardLabel")}
-                            setValue={(value: string) => setPassward(value)}
-                            value={passward}
+                            errorMessage={passwordErrorMessage}
+                            label={useLocale({}, "passwordLabel")}
+                            setValue={(value: string) => setPassword(value)}
+                            value={password}
                             secureTextEntry
-                            placeholder={useLocale({}, "passwardLabel")}
+                            placeholder={useLocale({}, "passwordLabel")}
                         />
                     </View>
                     <View style={[
@@ -171,7 +171,7 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                 </View>
                 ),
             Verifyier: async () => true,
-            Submit: checkPassward
+            Submit: checkPassword
         }
     ];
 

@@ -1,0 +1,3 @@
+type AddBookData = {
+    bookId: number;
+};

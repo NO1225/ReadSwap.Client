@@ -47,11 +47,11 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
     const [email, setEmail] = useState<string>("");
     const [emailErrorMessage, setEmailErrorMessage] = useState<string>("");
-    const [passward, setPassward] = useState<string>("");
-    const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>("");
 
-    const [confirmPassward, setConfirmPassward] = useState<string>("");
-    const [confirmPasswardErrorMessage, setConfirmPasswardErrorMessage] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [confirmPasswordErrorMessage, setConfirmPasswordErrorMessage] = useState<string>("");
 
 
     const checkEmail = async (): Promise<boolean> => {
@@ -84,26 +84,26 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
     const signUp = async (): Promise<boolean> => {
         let result: boolean = true;
 
-        if (validator.equals(passward, confirmPassward) == false) {
-            setConfirmPasswardErrorMessage(useLocalErrorMessage({}, "confirmPasswardDoesntMatch"))
+        if (validator.equals(password, confirmPassword) == false) {
+            setConfirmPasswordErrorMessage(useLocalErrorMessage({}, "confirmPasswordDoesntMatch"))
             result = false;
         }
         else
-            setConfirmPasswardErrorMessage("");
+            setConfirmPasswordErrorMessage("");
 
-        if (validator.isLength(passward, { min: 8, max: 20 }) == false) {
-            setPasswardErrorMessage(useLocalErrorMessage({}, "passwardLength"))
+        if (validator.isLength(password, { min: 8, max: 20 }) == false) {
+            setPasswordErrorMessage(useLocalErrorMessage({}, "passwordLength"))
             result = false;
         }
         else
-            setPasswardErrorMessage("");
+            setPasswordErrorMessage("");
 
         if (result == false)
             return result;
 
         let response = await signUpService(
             email,
-            passward
+            password
         )
 
         return response.success;
@@ -146,20 +146,20 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                 ]}>
                     <View style={styles.center}>
                         <InputWithLabel
-                            errorMessage={passwardErrorMessage}
-                            label={useLocale({}, "passwardLabel")}
-                            setValue={(value: string) => setPassward(value)}
-                            value={passward}
+                            errorMessage={passwordErrorMessage}
+                            label={useLocale({}, "passwordLabel")}
+                            setValue={(value: string) => setPassword(value)}
+                            value={password}
                             secureTextEntry
-                            placeholder={useLocale({}, "passwardLabel")}
+                            placeholder={useLocale({}, "passwordLabel")}
                         />
                         <InputWithLabel
-                            errorMessage={confirmPasswardErrorMessage}
-                            label={useLocale({}, "confirmPasswardLabel")}
-                            setValue={(value: string) => setConfirmPassward(value)}
-                            value={confirmPassward}
+                            errorMessage={confirmPasswordErrorMessage}
+                            label={useLocale({}, "confirmPasswordLabel")}
+                            setValue={(value: string) => setConfirmPassword(value)}
+                            value={confirmPassword}
                             secureTextEntry
-                            placeholder={useLocale({}, "confirmPasswardLabel")}
+                            placeholder={useLocale({}, "confirmPasswordLabel")}
                         />
                     </View>
                     <View style={[

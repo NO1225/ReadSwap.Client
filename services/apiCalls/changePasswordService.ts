@@ -2,7 +2,7 @@ import axios from "axios";
 import ApiRoutes from "../../constants/ApiRoutes";
 import { getAccessTokenForUsageService } from "../helper/getAccessTokenForUsageService";
 
-export async function changePasswordService(oldPassword: string, newPassward: string) {
+export async function changePasswordService(oldPassword: string, newPassword: string) {
     let token = await getAccessTokenForUsageService();
 
     if (token == null) {
@@ -11,7 +11,7 @@ export async function changePasswordService(oldPassword: string, newPassward: st
 
     let response = await axios.post<BaseResponse>(ApiRoutes.changePassword, {
         oldPassword,
-        newPassward
+        newPassword
     }, {
         headers: {
             Authorization: `Bearer ${token}`

@@ -16,8 +16,8 @@ export default {
     settingsHeader: "Settings",
     createNewAccountHeader: "Create a New Account",
     emailLabel: "E-mail",
-    passwardLabel: "Passward",
-    confirmPasswardLabel: "Confirm Passward",
+    passwordLabel: "Password",
+    confirmPasswordLabel: "Confirm Password",
     signingInHeader: "Sign In to Your Account",
     goToSignUp: "New User?? Create a New Account!!",
     firstNameLabel:"Enter First Name:",
@@ -31,6 +31,14 @@ export default {
     oldPasswordLabel: "Old Password:",
     newPasswordLabel: "New Password:",
     changeProfileHeader: "Change User Info",
+
+    addBookHeader:"Create a New Book",
+    titleLabel:"Enter Book Title:",
+    conditionLabel:"Enter Book Condition:",
+    authorLabel:"Enter Book Author:",
+    yearLabel:"Enter Book Publish Year:",
+    descriptionLabel:"Enter Book Description:",
+
   },
   ar: {
     direction: "rtl",
@@ -48,8 +56,8 @@ export default {
     settingsHeader: "الاعدادات",
     createNewAccountHeader: "انشاء حساب جديد",
     emailLabel: "البريد الالكتروني",
-    passwardLabel:"كلمة المرور",
-    confirmPasswardLabel: "تأكيد كلمة المرور",
+    passwordLabel:"كلمة المرور",
+    confirmPasswordLabel: "تأكيد كلمة المرور",
     signingInHeader: "تسجيل الدخول الى حسابك",
     goToSignUp: "مستخدم جديد؟؟ انشئ حسابك الان!!",
     firstNameLabel:"ادخل الاسم الاول:",
@@ -64,5 +72,11 @@ export default {
     newPasswordLabel: "كلمة السر الجديدة:",
     changeProfileHeader: "تغيير معلومات المستخدم",
 
+    addBookHeader:"انشاء كتاب جديد",
+    titleLabel:"ادخل عنوان الكتاب:",
+    conditionLabel:"ادخل حالة الكتاب:",
+    authorLabel:"ادخل اسم مؤلف الكتاب:",
+    yearLabel:"ادخل سنة نشر الكتاب:",
+    descriptionLabel:"ادخل تفاصيل الكتاب:",
   },
 };

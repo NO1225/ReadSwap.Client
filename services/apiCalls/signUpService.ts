@@ -1,10 +1,10 @@
 import axios from "axios";
 import ApiRoutes from "../../constants/ApiRoutes";
 
-export async function signUpService(email: string, passward: string) {
+export async function signUpService(email: string, password: string) {
     let response = await axios.post<ResponseWithData<SignUpData>>(ApiRoutes.signUp, {
         email,
-        passward
+        password
     })
 
     return response.data;
